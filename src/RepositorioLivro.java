@@ -33,5 +33,18 @@ public class RepositorioLivro {
        }
         return (true);
     }
-
+    public Livro buscaLivroIsbn(String isbn){
+        for(Livro liv: livros){
+            if(liv.getIsbn().equals(isbn)){
+                return (liv);
+            }
+        }
+        return (null)
+    }
+    public boolean existeLivroIsbn(String isbn){
+        if(this.buscaLivroIsbn(isbn)==null){
+            return (false);
+        }
+        return (true);
+    }
 }
