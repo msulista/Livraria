@@ -13,6 +13,7 @@ public class Cliente {
     private String cidade;
     private String uf;
     private ArrayList<Livro> carrinhoLivros;
+    private double precoCarrinho;
 
     /**
      * Método construtor
@@ -34,6 +35,7 @@ public class Cliente {
         this.cidade = cidade;
         this.uf = uf;
         this.carrinhoLivros = new ArrayList<Livro>();
+        this.precoCarrinho = 0;
     }
 
     /**
@@ -179,5 +181,19 @@ public class Cliente {
     public void carrinhoCompras(Livro livro){
 
         carrinhoLivros.add(livro);
+    }
+
+    /**
+     * Metodo responsavel por realizar o calculo dos valores dos livros adicionados ao carrinho.
+     *
+     * @return precoCarrinho com o valor do carrinho de compras
+     */
+    public Double calculaValorCarrinho(){
+
+        for(Livro liv : carrinhoLivros){
+
+            precoCarrinho = precoCarrinho + liv.getPreco();
+        }
+        return precoCarrinho;
     }
 }
