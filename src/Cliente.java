@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Created by marcus.rodrigues on 07/03/2015.
  */
@@ -10,6 +12,7 @@ public class Cliente {
     private String endereco;
     private String cidade;
     private String uf;
+    private ArrayList<Livro> livros;
 
     /**
      * Método construtor
@@ -30,6 +33,7 @@ public class Cliente {
         this.endereco = endereco;
         this.cidade = cidade;
         this.uf = uf;
+        this.livros = new ArrayList<Livro>();
     }
 
     /**
@@ -156,5 +160,24 @@ public class Cliente {
      */
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    /**
+     * Método para retorno da list de livros do cliente
+     *
+     * @return livros
+     */
+    public ArrayList<Livro> getLivros() {
+        return livros;
+    }
+
+    /**
+     * Metodo para adicionar livros no carrinho do cliente
+     *
+     * @param livro
+     */
+    public void carrinhoCompras(Livro livro){
+
+        livros.add(livro);
     }
 }
