@@ -11,6 +11,7 @@ public class Livro {
     private String isbn;
     private String editora;
     private String edicao;
+    private Double preco;
 
     /**
      * Metodo construtor
@@ -20,14 +21,16 @@ public class Livro {
      * @param isbn - Cod isbn do livro
      * @param editora - Nome da editora responsavel pelo livro
      * @param edicao - Indica a edição do livro
+     * @param preco - Indica o valor do livro
      *
      */
-    public Livro(String nome, String autor, String isbn, String editora, String edicao) {
+    public Livro(String nome, String autor, String isbn, String editora, String edicao, Double preco) {
         this.nome = nome;
         this.autor = autor;
         this.isbn = isbn;
         this.editora = editora;
         this.edicao = edicao;
+        this.preco = preco;
     }
 
     /**
@@ -53,7 +56,7 @@ public class Livro {
      *
      * @return Nome do autor
      */
-    public String getOutor() {
+    public String getAutor() {
         return autor;
     }
 
@@ -62,7 +65,7 @@ public class Livro {
      *
      * @param autor
      */
-    public void setOutor(String autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
@@ -118,5 +121,23 @@ public class Livro {
      */
     public void setEdicao(String edicao) {
         this.edicao = edicao;
+    }
+
+    /**
+     * Metodo para retorno do valor do livro
+     *
+     * @return
+     */
+    public Double getPreco() {
+        return preco;
+    }
+
+    /**
+     * Metodo para receber valor
+     *
+     * @param preco
+     */
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 }
