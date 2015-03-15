@@ -6,7 +6,7 @@
  */
 public class Livro {
 
-    private String nome;
+    private String titulo;
     private String autor;
     private String isbn;
     private String editora;
@@ -16,7 +16,7 @@ public class Livro {
     /**
      * Metodo construtor
      *
-     * @param nome - nome ou titulo do livro
+     * @param titulo - titulo ou titulo do livro
      * @param autor - Nome do outor do livro
      * @param isbn - Cod isbn do livro
      * @param editora - Nome da editora responsavel pelo livro
@@ -24,8 +24,8 @@ public class Livro {
      * @param preco - Indica o valor do livro
      *
      */
-    public Livro(String nome, String autor, String isbn, String editora, String edicao, Double preco) {
-        this.nome = nome;
+    public Livro(String titulo, String autor, String isbn, String editora, String edicao, Double preco) {
+        this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
         this.editora = editora;
@@ -34,25 +34,25 @@ public class Livro {
     }
 
     /**
-     * Método para retorno do nome do funcionario
+     * Método para retorno do titulo do funcionario
      *
-     * @return Nome do livro
+     * @return Titulo do livro
      */
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
 
     /**
-     * Método para receber nome
+     * Método para receber titulo
      *
-     * @param nome
+     * @param titulo
      */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     /**
-     * Método para retorno do nome do autor
+     * Método para retorno do titulo do autor
      *
      * @return Nome do autor
      */
@@ -88,7 +88,7 @@ public class Livro {
     }
 
     /**
-     * Método para retorno do nome da editora
+     * Método para retorno do titulo da editora
      *
      * @return Nome editora
      */

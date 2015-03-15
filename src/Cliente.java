@@ -12,7 +12,7 @@ public class Cliente {
     private String endereco;
     private String cidade;
     private String uf;
-    private ArrayList<Livro> livros;
+    private ArrayList<Livro> carrinhoLivros;
 
     /**
      * Método construtor
@@ -33,7 +33,7 @@ public class Cliente {
         this.endereco = endereco;
         this.cidade = cidade;
         this.uf = uf;
-        this.livros = new ArrayList<Livro>();
+        this.carrinhoLivros = new ArrayList<Livro>();
     }
 
     /**
@@ -163,21 +163,21 @@ public class Cliente {
     }
 
     /**
-     * Método para retorno da list de livros do cliente
+     * Método para retorno da list de carrinhoLivros do cliente
      *
-     * @return livros
+     * @return carrinhoLivros
      */
     public ArrayList<Livro> getLivros() {
-        return livros;
+        return carrinhoLivros;
     }
 
     /**
-     * Metodo para adicionar livros no carrinho do cliente
+     * Metodo para adicionar carrinhoLivros no carrinho do cliente
      *
      * @param livro
      */
     public void carrinhoCompras(Livro livro){
 
-        livros.add(livro);
+        carrinhoLivros.add(livro);
     }
 }
