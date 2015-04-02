@@ -1,3 +1,5 @@
+import model.Cliente;
+
 /**
  * Classe responsavel por finalizar a compra realizada pelo cliente
  *
@@ -9,7 +11,7 @@ public class Venda {
 
     /**
      * Metodo responsavel por inicializar os atributos da classe
-     * 
+     *
      * @param precoFinal
      */
     public Venda(Double precoFinal) {
