@@ -5,5 +5,17 @@ package model;
  */
 public class Item {
 
+    private String departamento;
 
+    public Item(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
 }

@@ -3,7 +3,7 @@ package model;
 /**
  * Created by marcus.rodrigues on 02/04/2015.
  */
-public class DVD {
+public class DVD extends Item{
 
     private String titulo;
     private String categoria;
@@ -13,7 +13,8 @@ public class DVD {
     private double preco;
     private int quantidade;
 
-    public DVD(String titulo, String categoria, int anoProducao, int duracaoMinutos, String idioma, double preco, int quantidade) {
+    public DVD(String departamento, String titulo, String categoria, int anoProducao, int duracaoMinutos, String idioma, double preco, int quantidade) {
+        super(departamento);
         this.titulo = titulo;
         this.categoria = categoria;
         this.anoProducao = anoProducao;

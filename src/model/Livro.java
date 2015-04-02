@@ -6,7 +6,7 @@ package model;
  * Classe model.Livro contem todas as informações
  * de um livro.
  */
-public class Livro {
+public class Livro extends Item{
 
     private String titulo;
     private String autor;
@@ -27,7 +27,8 @@ public class Livro {
      * @param preco - Indica o valor do livro
      *
      */
-    public Livro(String titulo, String autor, String isbn, String editora, String edicao, Double preco, int quantidade) {
+    public Livro(String departamento, String titulo, String autor, String isbn, String editora, String edicao, Double preco, int quantidade) {
+        super(departamento);
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
