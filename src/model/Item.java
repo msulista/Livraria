@@ -5,17 +5,17 @@ package model;
  */
 public class Item {
 
-    private String departamento;
+    private double preco;
 
-    public Item(String departamento) {
-        this.departamento = departamento;
+    public Item(double preco) {
+        this.preco = preco;
     }
 
-    public String getDepartamento() {
-        return departamento;
+    public double getPreco() {
+        return preco;
     }
 
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 }

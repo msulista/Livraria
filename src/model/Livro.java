@@ -13,7 +13,6 @@ public class Livro extends Item{
     private String isbn;
     private String editora;
     private String edicao;
-    private Double preco;
     private int quantidade;
 
     /**
@@ -27,14 +26,13 @@ public class Livro extends Item{
      * @param preco - Indica o valor do livro
      *
      */
-    public Livro(String departamento, String titulo, String autor, String isbn, String editora, String edicao, Double preco, int quantidade) {
-        super(departamento);
+    public Livro(double preco, String titulo, String autor, String isbn, String editora, String edicao, int quantidade) {
+        super(preco);
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
         this.editora = editora;
         this.edicao = edicao;
-        this.preco = preco;
     }
 
     /**
@@ -125,24 +123,6 @@ public class Livro extends Item{
      */
     public void setEdicao(String edicao) {
         this.edicao = edicao;
-    }
-
-    /**
-     * Metodo para retorno do valor do livro
-     *
-     * @return
-     */
-    public Double getPreco() {
-        return preco;
-    }
-
-    /**
-     * Metodo para receber valor
-     *
-     * @param preco
-     */
-    public void setPreco(Double preco) {
-        this.preco = preco;
     }
 
     public int getQuantidade() {
