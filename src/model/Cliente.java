@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by marcus.rodrigues on 07/03/2015.
@@ -10,12 +11,10 @@ public class Cliente {
     private String nome;
     private String cpf;
     private String telefone;
-    private String dataNascimento;
+    private Date dataNascimento;
     private String endereco;
     private String cidade;
     private String uf;
-    private ArrayList<Livro> carrinhoLivros;
-    private double precoCarrinho;
 
     /**
      * Método construtor
@@ -28,7 +27,7 @@ public class Cliente {
      * @param cidade - Cidade do cliente
      * @param uf - uf do cliente
      */
-    public Cliente(String nome, String cpf, String telefone, String dataNascimento, String endereco, String cidade, String uf) {
+    public Cliente(String nome, String cpf, String telefone, Date dataNascimento, String endereco, String cidade, String uf) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
@@ -36,8 +35,6 @@ public class Cliente {
         this.endereco = endereco;
         this.cidade = cidade;
         this.uf = uf;
-        this.carrinhoLivros = new ArrayList<Livro>();
-        this.precoCarrinho = 0;
     }
 
     /**
@@ -99,7 +96,7 @@ public class Cliente {
      *
      * @return dataNascimento
      */
-    public String getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
@@ -108,7 +105,7 @@ public class Cliente {
      *
      * @param dataNascimento
      */
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -164,38 +161,5 @@ public class Cliente {
      */
     public void setUf(String uf) {
         this.uf = uf;
-    }
-
-    /**
-     * Método para retorno da list de carrinhoLivros do cliente
-     *
-     * @return carrinhoLivros
-     */
-    public ArrayList<Livro> getLivros() {
-        return carrinhoLivros;
-    }
-
-    /**
-     * Metodo para adicionar carrinhoLivros no carrinho do cliente
-     *
-     * @param livro
-     */
-    public void carrinhoCompras(Livro livro){
-
-        carrinhoLivros.add(livro);
-    }
-
-    /**
-     * Metodo responsavel por realizar o calculo dos valores dos livros adicionados ao carrinho.
-     *
-     * @return precoCarrinho com o valor do carrinho de compras
-     */
-    public Double calculaValorCarrinho(){
-
-        for(Livro liv : carrinhoLivros){
-
-            precoCarrinho = precoCarrinho + liv.getPreco();
-        }
-        return precoCarrinho;
     }
 }

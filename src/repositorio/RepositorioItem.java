@@ -144,7 +144,7 @@ public class RepositorioItem {
 
     // Tratanto de Eletronicos
 
-    public void adicionaEletronico(Eletronico eletronico){
+    public void adicionarEletronico(Eletronico eletronico){
         listaDeitens.add(eletronico);
     }
 
