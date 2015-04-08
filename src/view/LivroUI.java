@@ -42,6 +42,13 @@ public class LivroUI {
     }
 
     public void cadastrarLivro(){
+        System.out.println("Titulo : Lone Survivor" +
+                "\nAutor : Marcus Luttrell" +
+                "\nIsbn: 978-0-316-06759-1" +
+                "\nEditora: Little Brows" +
+                "\nEdição: June 2007" +
+                "\nQuantidade: 5" +
+                "\nPreço: R$ 57,10");
         String titulo = "Lone Survivor";
         String autor = "Marcus Luttrell";
         String isbn = "978-0-316-06759-1";
@@ -49,8 +56,8 @@ public class LivroUI {
         String edicao = "June 2007";
         int quantidade = 5;
         double preco = 57.10;
-        listaItens.adicionarLivro(new Livro(preco, titulo, autor, isbn, editora, edicao, quantidade));
-        System.out.println("Livro " + titulo + " cadastrado com sucesso!!!");
+        listaItens.adicionarLivro(new Livro(preco, quantidade, titulo, autor, isbn, editora, edicao));
+        System.out.println("\nLivro " + titulo + " cadastrado com sucesso!!!");
     }
 
     public void listaLivrosCadastrados(){

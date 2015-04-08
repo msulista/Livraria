@@ -30,4 +30,8 @@ public class Pagamento {
     public void setDataCompra(Date dataCompra) {
         this.dataCompra = dataCompra;
     }
+
+    public String confirmaPagamento(){
+        return null;
+    }
 }

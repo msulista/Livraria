@@ -6,9 +6,11 @@ package model;
 public class Item {
 
     private double preco;
+    private int quantidade;
 
-    public Item(double preco) {
+    public Item(double preco, int quantidade) {
         this.preco = preco;
+        this.quantidade = quantidade;
     }
 
     public double getPreco() {
@@ -17,5 +19,17 @@ public class Item {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void retiraEstoque(Item item){
+        item.setQuantidade(quantidade - 1);
     }
 }

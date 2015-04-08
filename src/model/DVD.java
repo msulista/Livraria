@@ -10,16 +10,14 @@ public class DVD extends Item{
     private int anoProducao;
     private int duracaoMinutos;
     private String idioma;
-    private int quantidade;
 
-    public DVD(double preco, String titulo, String categoria, int anoProducao, int duracaoMinutos, String idioma, int quantidade) {
-        super(preco);
+    public DVD(double preco, int quantidade, String titulo, String categoria, int anoProducao, int duracaoMinutos, String idioma) {
+        super(preco, quantidade);
         this.titulo = titulo;
         this.categoria = categoria;
         this.anoProducao = anoProducao;
         this.duracaoMinutos = duracaoMinutos;
         this.idioma = idioma;
-        this.quantidade = quantidade;
     }
 
     public String getTitulo() {
@@ -62,11 +60,4 @@ public class DVD extends Item{
         this.idioma = idioma;
     }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
 }

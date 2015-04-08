@@ -3,6 +3,7 @@ package repositorio;
 import model.Cliente;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe responsavel por guardar e manipular o cliente
@@ -12,15 +13,15 @@ import java.util.ArrayList;
  */
 public class RepositorioCliente {
 
-    ArrayList<Cliente> clientes;
+    private List<Cliente> listaDeclientes;
 
     /**
      * Metodo responsavel por inicializar a lista de clientes
      *
-     * @param clientes
+     * @param clietes = Lista de clientes
      */
-    public RepositorioCliente(ArrayList<Cliente> clientes) {
-        this.clientes = clientes;
+    public RepositorioCliente() {
+        this.listaDeclientes = new ArrayList<Cliente>();
     }
 
     /**
@@ -30,7 +31,7 @@ public class RepositorioCliente {
      */
     public void adicionaCliente(Cliente cliente){
 
-        clientes.add(cliente);
+        listaDeclientes.add(cliente);
     }
 
     /**
@@ -38,8 +39,8 @@ public class RepositorioCliente {
      *
      * @return
      */
-    public ArrayList<Cliente> getClientes(){
-        return clientes;
+    public List<Cliente> getClientes(){
+        return listaDeclientes;
     }
 
     /**
@@ -49,7 +50,7 @@ public class RepositorioCliente {
      * @return cliente se existir, se não retorna null
      */
     public Cliente buscaClienteNome(String nome){
-        for (Cliente cli: clientes) {
+        for (Cliente cli: listaDeclientes) {
             if(cli.getNome().equalsIgnoreCase(nome)){
                 return (cli);
             }
@@ -75,8 +76,8 @@ public class RepositorioCliente {
      * @return cliente se existir, se não retorna null
      */
     public Cliente buscaClienteCpf(String cpf){
-        for (Cliente cli: clientes) {
-            if(cli.getNome().equals(cpf)){
+        for (Cliente cli: listaDeclientes) {
+            if(cli.getCpf().equals(cpf)){
                 return (cli);
             }
         }
@@ -101,8 +102,8 @@ public class RepositorioCliente {
      * @return cliente se existir, se não retorna null
      */
     public Cliente buscaClienteFone(String fone){
-        for (Cliente cli: clientes) {
-            if(cli.getNome().equals(fone)){
+        for (Cliente cli: listaDeclientes) {
+            if(cli.getTelefone().equals(fone)){
                 return (cli);
             }
         }

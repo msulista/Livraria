@@ -43,14 +43,21 @@ public class EletronicoUI {
 
     public void cadastrarEletronico(){
 
+        System.out.println("Tipo de Produto : Multifuncional" +
+                "\nMarca: HP" +
+                "\nModelo: OfficeJet Pro 276dw Colorida Wi-Fi" +
+                "\nVoltagem (V): 110" +
+                "\nQuantidade: 2" +
+                "\nPreço (R$): 1139.05");
+
         String tipoDeProduto = "Multifuncional";
         String marca = "HP";
         String modelo = "OfficeJet Pro 276dw Colorida Wi-Fi";
         int voltagem = 110;
         int quantidade = 2;
         double preco = 1139.05;
-        listaItens.adicionarEletronico(new Eletronico(preco, tipoDeProduto, marca, modelo, voltagem, quantidade));
-        System.out.println("Eletronico " + tipoDeProduto + " cadastrado com sucesso!!!");
+        listaItens.adicionarEletronico(new Eletronico(preco, quantidade, tipoDeProduto, marca, modelo, voltagem));
+        System.out.println("\nEletronico " + tipoDeProduto + " cadastrado com sucesso!!!");
     }
 
     public void listarEletronicosCadastrados(){

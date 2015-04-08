@@ -44,6 +44,10 @@ public class Pedido {
         return (true);
     }
 
+    public int getCodigo() {
+        return codigo;
+    }
+
     private int generateCodigo(){
         return (CODIGO_PEDIDO++);
     }

@@ -42,6 +42,13 @@ public class DvdUI {
     }
 
     public void cadastrarDVD(){
+        System.out.println("Titulo: Joe Bonamassa - Tour de Force Live in London" +
+                "\nCategoria: Blues" +
+                "\nAno de Produção: 2013" +
+                "\nDuração em minutos: 180" +
+                "\nIdioma: Inglês" +
+                "\nQuantidade: 7" +
+                "\nPreço: R$54,90");
 
         String titulo = "Joe Bonamassa - Tour de Force Live in London";
         String categoria = "Blues";
@@ -50,8 +57,8 @@ public class DvdUI {
         String idioma = "Ingles";
         int quantidade = 7;
         double preco = 54.90;
-        listaItens.adicionarDVD(new DVD(preco, titulo, categoria, anoProducao, duracaoMinutos, idioma, quantidade));
-        System.out.println("DVD " + titulo + " cadastrado com sucesso!!!");
+        listaItens.adicionarDVD(new DVD(preco, quantidade, titulo, categoria, anoProducao, duracaoMinutos, idioma));
+        System.out.println("\nDVD " + titulo + " cadastrado com sucesso!!!");
     }
 
     public void listarDVDCadastrados(){

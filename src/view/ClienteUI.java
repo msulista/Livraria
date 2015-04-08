@@ -50,7 +50,7 @@ public class ClienteUI {
         }while (opcao != ClienteMenu.OP_VOLTAR);
     }
 
-    private void cadastrarCliente(){
+    public void cadastrarCliente(){
         //Print para mostrar o cliente sendo cadastrado...
         System.out.println("Nome : Marcus Rodrigues" +
                 "\nCPF: 8270752xxxx" +
@@ -60,9 +60,10 @@ public class ClienteUI {
                 "\nCidade: Porto Alegre" +
                 "\nUF: RS");
         String cpf = "8270752xxxx";
-        if (listaClientes.existeClienteCpf(cpf)){
+        if (listaClientes.existeClienteCpf(cpf) == true){
             System.out.println("CPF já cadastro no sistema!!!");
         }else{
+
             String nome = "Marcus Rodrigues";
             String telefone = "95887354";
             String dataNascimento = "03/04/1981";
@@ -78,8 +79,9 @@ public class ClienteUI {
             String endereco = "Joaquim Nabuco";
             String cidade = "Porto Alegre";
             String uf = "RS";
-            listaClientes.adicionaCliente(new Cliente(nome, cpf, telefone, dataNasc, endereco, cidade, uf));
-            System.out.println("Cliente " + nome + " cadastrado com sucesso!!!");
+            Cliente cliente = new Cliente(nome, cpf, telefone, dataNasc, endereco, cidade, uf);
+            listaClientes.adicionaCliente(cliente);
+            System.out.println("\nCliente " + nome + " cadastrado com sucesso!!!");
         }
 
     }

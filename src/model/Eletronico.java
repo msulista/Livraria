@@ -9,15 +9,13 @@ public class Eletronico extends Item {
     private String marca;
     private String modelo;
     private int voltagem;
-    private int quantidade;
 
-    public Eletronico(double preco, String tipoDeProduto, String marca, String modelo, int voltagem, int quantidade) {
-        super(preco);
+    public Eletronico(double preco, int quantidade, String tipoDeProduto, String marca, String modelo, int voltagem) {
+        super(preco, quantidade);
         this.tipoDeProduto = tipoDeProduto;
         this.marca = marca;
         this.modelo = modelo;
         this.voltagem = voltagem;
-        this.quantidade = quantidade;
     }
 
     public String getTipoDeProduto() {
@@ -50,13 +48,5 @@ public class Eletronico extends Item {
 
     public void setVoltagem(int voltagem) {
         this.voltagem = voltagem;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
     }
 }

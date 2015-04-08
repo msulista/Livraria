@@ -13,7 +13,6 @@ public class Livro extends Item{
     private String isbn;
     private String editora;
     private String edicao;
-    private int quantidade;
 
     /**
      * Metodo construtor
@@ -26,8 +25,8 @@ public class Livro extends Item{
      * @param preco - Indica o valor do livro
      *
      */
-    public Livro(double preco, String titulo, String autor, String isbn, String editora, String edicao, int quantidade) {
-        super(preco);
+    public Livro(double preco, int quantidade, String titulo, String autor, String isbn, String editora, String edicao) {
+        super(preco, quantidade);
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
@@ -125,11 +124,4 @@ public class Livro extends Item{
         this.edicao = edicao;
     }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
 }

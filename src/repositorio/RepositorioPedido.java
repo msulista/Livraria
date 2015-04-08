@@ -16,7 +16,7 @@ public class RepositorioPedido {
         this.listaPedidos = new ArrayList<Pedido>();
     }
 
-    public void adicionaPedido(Pedido pedido){
+    public void adicionarPedido(Pedido pedido){
         this.listaPedidos.add(pedido);
     }
 
@@ -38,4 +38,5 @@ public class RepositorioPedido {
         }
         return (true);
     }
+
 }
