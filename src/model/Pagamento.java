@@ -1,37 +1,26 @@
 package model;
 
-import java.util.Date;
-
 /**
  * Created by marcus.rodrigues on 03/04/2015.
  */
 public class Pagamento {
 
-    private double valorTotal;
-    private Date dataCompra;
+    private Cliente cliente;
+    private String tipoDePagamento;
 
-    public Pagamento(double valorTotal, Date dataCompra) {
-        this.valorTotal = valorTotal;
-        this.dataCompra = dataCompra;
+    public Pagamento(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public double getValorTotal() {
-        return valorTotal;
+    public String getTipoDePagamento() {
+        return tipoDePagamento;
     }
 
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public Date getDataCompra() {
-        return dataCompra;
-    }
-
-    public void setDataCompra(Date dataCompra) {
-        this.dataCompra = dataCompra;
+    public void setTipoDePagamento(String tipoDePagamento) {
+        this.tipoDePagamento = tipoDePagamento;
     }
 
     public String confirmaPagamento(){
-        return null;
+        return (cliente.getNome() + "Realizou o pagamento realizado com sucesso!!!");
     }
 }

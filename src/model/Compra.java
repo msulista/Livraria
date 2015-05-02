@@ -37,6 +37,22 @@ public class Compra {
         }
         return valor;
     }
+    public void emitirNotaFiscalDaCompra(Pedido pedido){
 
+        int contadorItens = 1;
+        System.out.println("\t\t\t###NOTAFISCAL###\n" +
+                "Cliente: " + pedido.getCliente().getNome() + "\n" +
+                "CPF: " + pedido.getCliente().getCpf() +"\n" +
+                "Numero Pedido: " + pedido.getCodigo() + "\n" +
+                "==================================================" +
+                "\n##Item   \tProduto      \t\tValor(R$)");
+        for(Item item : pedido.getListaCarrinho()){
+
+            System.out.println(contadorItens + " -\t\t " + item.getClass() +"\t\t\tR$ " + item.getPreco());
+            item.retiraEstoque(item);
+
+        }
+        System.out.println("##Valor Total:\t\t\t\t\t\tR$" + calculaValorCompra(pedido) );
+    }
 
 }

@@ -11,7 +11,7 @@ public class Cliente {
     private String nome;
     private String cpf;
     private String telefone;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String endereco;
     private String cidade;
     private String uf;
@@ -27,7 +27,7 @@ public class Cliente {
      * @param cidade - Cidade do cliente
      * @param uf - uf do cliente
      */
-    public Cliente(String nome, String cpf, String telefone, Date dataNascimento, String endereco, String cidade, String uf) {
+    public Cliente(String nome, String cpf, String telefone, String dataNascimento, String endereco, String cidade, String uf) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
@@ -96,7 +96,7 @@ public class Cliente {
      *
      * @return dataNascimento
      */
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
@@ -105,7 +105,7 @@ public class Cliente {
      *
      * @param dataNascimento
      */
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
