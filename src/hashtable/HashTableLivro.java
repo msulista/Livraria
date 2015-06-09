@@ -20,7 +20,8 @@ public class HashTableLivro implements IhashTableLivro{
 
     @Override
     public int hashcodeOne(String isbn) {
-        int hashOne = Integer.parseInt(isbn);
+        int hashOne = 0;
+        hashOne = Integer.parseInt(isbn);
         hashOne = hashOne % livrosHash.length;
         return hashOne;
     }
@@ -52,6 +53,7 @@ public class HashTableLivro implements IhashTableLivro{
         return null;
     }
 
+    //Chamo só na hora de criaar meu hashTwo
     public static String md5(String isbn){
         String hashMd5 = "";
         MessageDigest md = null;
@@ -65,8 +67,10 @@ public class HashTableLivro implements IhashTableLivro{
         return hashMd5;
     }
 
-    public static int verificaChave(){
+    public static int verificaChave(List<Integer> pilhaDeHashs){
         int key = 0;
+
+        if (pilhaDeHashs.contains())
 
         return key;
     }
