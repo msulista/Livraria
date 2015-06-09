@@ -10,8 +10,8 @@ public class Eletronico extends Item {
     private String modelo;
     private int voltagem;
 
-    public Eletronico(double preco, int quantidade, String tipoDeProduto, String marca, String modelo, int voltagem) {
-        super(preco, quantidade);
+    public Eletronico(String titulo, String tipoDeProduto, String marca, String modelo, int voltagem) {
+        super(titulo);
         this.tipoDeProduto = tipoDeProduto;
         this.marca = marca;
         this.modelo = modelo;

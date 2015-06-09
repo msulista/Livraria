@@ -27,7 +27,7 @@ public class Cliente {
      * @param cidade - Cidade do cliente
      * @param uf - uf do cliente
      */
-    public Cliente(String nome, String cpf, String telefone, String dataNascimento, String endereco, String cidade, String uf) {
+    public Cliente(String nome, String cpf, String telefone) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;

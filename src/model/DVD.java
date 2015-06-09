@@ -5,27 +5,17 @@ package model;
  */
 public class DVD extends Item{
 
-    private String titulo;
     private String categoria;
     private int anoProducao;
     private int duracaoMinutos;
     private String idioma;
 
-    public DVD(double preco, int quantidade, String titulo, String categoria, int anoProducao, int duracaoMinutos, String idioma) {
-        super(preco, quantidade);
-        this.titulo = titulo;
+    public DVD(String titulo, String categoria) {
+        super(titulo);
         this.categoria = categoria;
         this.anoProducao = anoProducao;
         this.duracaoMinutos = duracaoMinutos;
         this.idioma = idioma;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
     }
 
     public String getCategoria() {

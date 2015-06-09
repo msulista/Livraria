@@ -1,96 +1,185 @@
 package livraria;
 import model.*;
+import util.Console;
+import view.menu.LivrariaMenu;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.regex.Pattern;
 
 
 /**
  * Created by marcus.rodrigues on 04/04/2015.
  */
 public class Livraria {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
+        Estoque estoque = new Estoque();
 
-        System.out.println("\t\tMODO DEMONSTRAÇÃO" +
-                "\n==============================================\n");
-        //Cadastrando cliente
-        System.out.println("\t\tCADASTRANDO CLIENTE\n");
-        System.out.println("Nome : Marcus Rodrigues" +
-                "\nCPF: 8270752xxxx" +
-                "\nTelefone: 95887354" +
-                "\nData de Nascimento: 03/04/1981" +
-                "\nEndereço: Joaquim Nabuco" +
-                "\nCidade: Porto Alegre" +
-                "\nUF: RS");
-        Cliente cliente = new Cliente("Marcus Rodrigues", "827075290xx", "95887354", "03/04/19081", "Joaquim Nabuco", "Porto Alegre", "RS" );
-        System.out.println("\n Cliente " + cliente.getNome() + " cadastrado com sucesso!!!");
-        System.out.println("============================================\n");
+        //Criando cliente
+        Cliente cliente = new Cliente("Marcus", "123456789", "95887354");
 
-        //Cadastrando Item
-        System.out.println("\t\tCADASTRANDO LIVRO\n");
-        System.out.println("Titulo : Lone Survivor" +
-                "\nAutor : Marcus Luttrell" +
-                "\nIsbn: 978-0-316-06759-1" +
-                "\nEditora: Little Brows" +
-                "\nEdição: June 2007" +
-                "\nQuantidade: 5" +
-                "\nPreço: R$ 57,10");
+        //lendo arquivo csv e criando objetos e adicionando no vetor Estoque
+        try {
+            lerArquivo(estoque);
 
-        Livro livro = new Livro(57.10, 5, "Lone Survivor", "Marcus Luttrell", "978-0-316-06759-1", "Little Brows", "June 2007" );
-        System.out.println("\nLivro " + livro.getTitulo() + " cadastrado com sucesso!!!");
-        System.out.println("============================================\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //Mostra Estoque ordenado
+        for (int i = 0; i < 5000; i++){
 
-        //Cadastrando Item
-        System.out.println("\t\tCADASTRANDO DVD\n");
-        System.out.println("Titulo: Joe Bonamassa - Tour de Force Live in London" +
-                "\nCategoria: Blues" +
-                "\nAno de Produção: 2013" +
-                "\nDuração em minutos: 180" +
-                "\nIdioma: Inglês" +
-                "\nQuantidade: 7" +
-                "\nPreço: R$54,90");
-        DVD dvd = new DVD(54.90, 7, "Joe Bonamassa - Tour de Force Live in London", "Blues", 2013, 180, "Inglês");
-        System.out.println("Dvd " + dvd.getTitulo() + " cadastrado com sucesso!!!");
-        System.out.println("============================================\n");
+            System.out.println("Tipo: " + estoque.getIndice(i).getClass() + " - Item "+ i+1 + ": " + estoque.getIndice(i).getTitulo());
+        }
 
-        //Cadastrando Item
-        System.out.println("\t\tCADASTRANDO ELETRONICO\n");
-        System.out.println("Tipo de Produto : Multifuncional" +
-                "\nMarca: HP" +
-                "\nModelo: OfficeJet Pro 276dw Colorida Wi-Fi" +
-                "\nVoltagem (V): 110" +
-                "\nQuantidade: 2" +
-                "\nPreço (R$): 1139.05");
-        Eletronico eletronico = new Eletronico(1139.05, 2, "Multifuncional", "HP", "OfficeJet Pro 276dw Colorida Wi-Fi", 110);
-        System.out.println("Eletrônico " + eletronico.getModelo() + " cadastrado com sucesso!!!");
-        System.out.println("============================================\n");
+        //livrariaView.telaInicial();
 
-        //Cliente escolhendo itens
-        System.out.println("\t\tCLIENTE ADICIONANDO ITENS EM SEU CARRINHO\n");
-        System.out.println("Cliente : Marcus Rodrigues" +
-                "\nItem 1: Lone Survivor" +
-                "\nItem 2: Joe Bonamassa - Tour de Force Live in London" +
-                "\nItem 3: OfficeJet Pro 276dw Colorida Wi-Fi");
-        Pedido pedido = new Pedido(cliente);
-        pedido.adicionaItemNoCarrinho(livro);
-        pedido.adicionaItemNoCarrinho(dvd);
-        pedido.adicionaItemNoCarrinho(eletronico);
-        System.out.println("Pedido numero " + pedido.getCodigo() + " cadastrado com sucesso!!!");
-        System.out.println("============================================\n");
+        int opcao;
+        Item item;
 
-        //Efetuando a compra
-        System.out.println("############################################\n");
-        System.out.println("============================================\n");
-        System.out.println("\t\t\tFINALIZANDO COMPRA\n");
-        Pagamento pagamento = new Pagamento(cliente);
-        pagamento.setTipoDePagamento("Boleto Bancario");
-        Compra compra = new Compra(pedido, pagamento);
-        compra.emitirNotaFiscalDaCompra(pedido);
-        System.out.println("============================================\n");
-        System.out.println("############################################\n");
+        do {
+
+            System.out.println(LivrariaMenu.getOpcoes());
+            opcao = Console.lerInt("Digite opção desejada: ");
+
+            switch (opcao){
+                case LivrariaMenu.OP_BUSCA_LINEAR: {
+                    System.out.println("\t\tBUSCA LINEAR\n");
+                    item = estoque.buscaPorTituloLinear(Console.lerString("Digite Titulo: "));
+                    if (item != null){
+                        System.out.println("Resultado - Tipo: "+ "" + item.getClass().getTypeName() + " - Titulo: " + item.getTitulo());
+                    }else{
+                        System.out.println("\n Titulo não encontrado!!!");
+                    }
+                    break;
+                }
+                case LivrariaMenu.OP_COMPRA_OTIMIZADA:{
+                    System.out.println("\t\tBUSCA OTIMIZADA\n");
+                    item = estoque.buscaPorTituloBinaria(Console.lerString("Digite Titulo: "));
+                    if (item != null){
+                        System.out.println("Resultado - Tipo: "+ "" + item.getClass().getTypeName() + " - Titulo: " + item.getTitulo());
+                    }else{
+                        System.out.println("\n Titulo não encontrado!!!");
+                    }
+
+                    break;
+                }
+                case LivrariaMenu.OP_SAIR:{
+                    System.out.println("Voltar ao menu principal!!!");
+                    break;
+                }
+                default:
+                    System.out.println("Digite uma opção válida!!!");
+            }
+        }while (opcao != LivrariaMenu.OP_SAIR);
+
 
         System.out.println("\n\nFim do Programa!!!");
     }
 
-    public static void vetorItem(){
 
+//Metodos para ler, separar, criar objetos e adicionar ao estoque
+    public static void lerArquivo(Estoque estoque) throws IOException {
+        String[] itens = new String[6425];
+
+        //Abre arquivo .cvs
+        FileReader arquicoCSV = new FileReader("C:\\Users\\marcus.rodrigues\\Desktop\\dados.txt");
+        BufferedReader myBuffer = new BufferedReader(arquicoCSV);
+
+        //Le linhas do arquivo
+        String linha = myBuffer.readLine();
+        for (int i = 0; i < itens.length; i++){
+            itens[i] = linha;
+            criaObjetosDeItem(linha, estoque);
+            linha = myBuffer.readLine();//Não sei por que isso esta funcionando mas esta, então deixa assim
+            //System.out.println(i + " - " + itens[i]);
+        }
+        arquicoCSV.close();
     }
+    public static void criaObjetosDeItem(String linha, Estoque estoque){
+        String[] item = new String[20]; //Pra colocar a linha
+
+        String titulo = "";
+        String isbn = "";
+        String autor = "";
+        String genero = "";
+        int ano = 0;
+
+        //Separa os ; de cada linha
+        item = linha.split(Pattern.quote(";"));
+
+        if (item[0].equalsIgnoreCase("livro")) {
+            Livro livro;
+            titulo = item[1];
+            isbn = item[2];
+            if (item.length > 3){
+                for (int indice = 3; indice < item.length; indice++) {
+                    autor = autor.concat(item[indice]);
+                }
+            }
+            livro = new Livro(titulo, autor, isbn);
+            adicionaEstoque(estoque, livro);
+
+
+        }else if(item[0].equalsIgnoreCase("dvd")){
+            DVD dvd;
+            titulo = item[1];
+            //ano = Integer.parseInt(item[2]);
+            genero = item[3];
+            dvd = new DVD(titulo, genero);
+            adicionaEstoque(estoque, dvd);
+
+        }else if (item[0].equalsIgnoreCase("eletronico")){
+            Eletronico eletronico;
+        }
+    }
+
+    public static void adicionaEstoque(Estoque estoque, Item item){
+
+        estoque.add(item);
+    }
+
+    public void telaInicial(Estoque estoque){
+
+        int opcao;
+        Item item;
+
+        do {
+
+            System.out.println(LivrariaMenu.getOpcoes());
+            opcao = Console.lerInt("Digite opção desejada: ");
+
+            switch (opcao){
+                case LivrariaMenu.OP_BUSCA_LINEAR: {
+                    System.out.println("\t\tBUSCA LINEAR\n");
+                    item = estoque.buscaPorTituloLinear(Console.lerString("Digite Titulo: "));
+                    if (item != null){
+                        System.out.println("Tipo: "+ "" + item.getClass().getTypeName() + " - Titulo: " + item.getTitulo());
+                    }else{
+                        System.out.println("\n Titulo não encontrado!!!");
+                    }
+                    break;
+                }
+                case LivrariaMenu.OP_COMPRA_OTIMIZADA:{
+                    System.out.println("\t\tBUSCA OTIMIZADA\n");
+                    item = estoque.buscaPorTituloBinaria(Console.lerString("Digite Titulo: "));
+                    if (item != null){
+                        System.out.println("Tipo: "+ "" + item.getClass().getTypeName() + " - Titulo: " + item.getTitulo());
+                    }else{
+                        System.out.println("\n Titulo não encontrado!!!");
+                    }
+
+                    break;
+                }
+                case LivrariaMenu.OP_SAIR:{
+                    System.out.println("Voltar ao menu principal!!!");
+                    break;
+                }
+                default:
+                    System.out.println("Digite uma opção válida!!!");
+            }
+        }while (opcao != LivrariaMenu.OP_SAIR);
+    }
+
 }

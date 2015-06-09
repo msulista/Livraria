@@ -3,14 +3,29 @@ package model;
 /**
  * Created by marcus.rodrigues on 02/04/2015.
  */
-public class Item {
+public class Item implements Comparable<Item>{
 
     private double preco;
     private int quantidade;
+    private String titulo;
 
-    public Item(double preco, int quantidade) {
+    public Item(String titulo) {
+        this.titulo = titulo;
         this.preco = preco;
         this.quantidade = quantidade;
+    }
+
+    @Override
+    public int compareTo(Item item) {
+        return titulo.compareTo(item.getTitulo());
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public double getPreco() {

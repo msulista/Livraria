@@ -8,16 +8,19 @@ package model;
  */
 public class Livro extends Item{
 
-    private String titulo;
+    private String tituloLivro;
     private String autor;
     private String isbn;
     private String editora;
     private String edicao;
+    private int hashCodeOne;
+    private int hashCodeTwo;
+    private int key;
 
     /**
      * Metodo construtor
      *
-     * @param titulo - titulo ou titulo do livro
+     *
      * @param autor - Nome do outor do livro
      * @param isbn - Cod isbn do livro
      * @param editora - Nome da editora responsavel pelo livro
@@ -25,31 +28,21 @@ public class Livro extends Item{
      * @param preco - Indica o valor do livro
      *
      */
-    public Livro(double preco, int quantidade, String titulo, String autor, String isbn, String editora, String edicao) {
-        super(preco, quantidade);
-        this.titulo = titulo;
+    public Livro(String titulo, String autor, String isbn) {
+        super(titulo);
         this.autor = autor;
         this.isbn = isbn;
         this.editora = editora;
         this.edicao = edicao;
     }
-
-    /**
-     * Método para retorno do titulo do funcionario
-     *
-     * @return Titulo do livro
-     */
-    public String getTitulo() {
-        return titulo;
-    }
-
-    /**
-     * Método para receber titulo
-     *
-     * @param titulo
-     */
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public Livro(String titulo, String autor, String isbn, int hashCodeOne, int hashCodeTwo,int key) {
+        super(titulo);
+        this.autor = autor;
+        this.isbn = isbn;
+        this.hashCodeOne = hashCodeOne;
+        this.hashCodeTwo = hashCodeTwo;
+        this.tituloLivro = titulo;
+        this.key = key;
     }
 
     /**
@@ -124,4 +117,23 @@ public class Livro extends Item{
         this.edicao = edicao;
     }
 
+    public String getTituloLivro() {
+        return tituloLivro;
+    }
+
+    public int getHashCodeOne() {
+        return hashCodeOne;
+    }
+
+    public int getHashCodeTwo() {
+        return hashCodeTwo;
+    }
+
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
 }
