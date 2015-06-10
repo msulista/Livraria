@@ -67,10 +67,12 @@ public class HashTableLivro implements IhashTableLivro{
         return hashMd5;
     }
 
-    public static int verificaChave(List<Integer> pilhaDeHashs){
+    public static int verificaChave(List<Integer> pilhaDeHashs, Livro livro){
         int key = 0;
 
-        if (pilhaDeHashs.contains())
+        if (!pilhaDeHashs.contains()){
+            pilhaDeHashs.add(livro.getKey())
+        }
 
         return key;
     }
