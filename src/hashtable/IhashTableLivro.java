@@ -10,7 +10,7 @@ public interface IhashTableLivro {
     public int hashcodeOne(String isbn);
     public int hashcodeTwo(String isbn);
 
-    public Livro criaLivroHash(Livro livro, int key);
+    public Livro criaLivroHash(Livro livro, int hc1, int hc2, int key);
     public void insereLivroNoHashList(Livro livro);
 
     public Livro buscaLivroHash(int isbn);

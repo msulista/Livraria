@@ -36,15 +36,32 @@ public class HashTableLivro implements IhashTableLivro{
     }
 
     @Override
-    public Livro criaLivroHash(Livro livro, int key) {
-        int hash1 = hashcodeOne(livro.getIsbn());
-        int hash2 = hashcodeTwo(livro.getIsbn());
-        Livro livro1 = new Livro(livro.getTitulo(), livro.getAutor(), livro.getIsbn(), hash1, hash2, key);
-        return null;
+    public Livro criaLivroHash(Livro livro, int hash1, int hash2, int key) {
+        Livro livroHash = new Livro(livro.getTitulo(), livro.getAutor(), livro.getIsbn(), hash1, hash2, key);
+        return livroHash;
     }
 
     @Override
     public void insereLivroNoHashList(Livro livro) {
+
+        if (livrosHash[hashcodeOne(livro.getIsbn())] == null){
+            int hashCode1 = hashcodeOne(livro.getIsbn());
+            int hashCode2 = hashcodeTwo(livro.getIsbn());
+            int key = Integer.parseInt(livro.getIsbn());
+            livrosHash[hashCode1] = criaLivroHash(livro, hashCode1, hashCode2, key);
+
+        }else if (livrosHash[hashcodeOne(livro.getIsbn())].getHashCodeOne() == hashcodeOne(livro.getIsbn())){
+            Livro trocaLivro = livrosHash[hashcodeOne(livro.getIsbn())];
+            livrosHash[hashcodeTwo(trocaLivro.getIsbn())] = trocaLivro;
+
+            int hashCode1 = hashcodeOne(livro.getIsbn());
+            int hashCode2 = hashcodeTwo(livro.getIsbn());
+            int key = Integer.parseInt(livro.getIsbn());
+            //pilhaDeHashs.add(hashCode1);
+            livrosHash[hashCode1] = criaLivroHash(livro, hashCode1, hashCode2, key);
+        }else if (pilhaDeHashs.contains(hashcodeOne(livro.getIsbn()))){
+
+        }
 
     }
 
@@ -66,14 +83,15 @@ public class HashTableLivro implements IhashTableLivro{
         hashMd5 = hash.toString(9);
         return hashMd5;
     }
-
+/*
     public static int verificaChave(List<Integer> pilhaDeHashs, Livro livro){
         int key = 0;
 
-        if (!pilhaDeHashs.contains()){
+        if (!pilhaDeHashs.contains(livro.getKey())){
             pilhaDeHashs.add(livro.getKey())
         }
 
         return key;
     }
+*/
 }
