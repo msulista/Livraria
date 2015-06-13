@@ -35,12 +35,10 @@ public class Livro extends Item{
         this.editora = editora;
         this.edicao = edicao;
     }
-    public Livro(String titulo, String autor, String isbn, int hashCodeOne, int hashCodeTwo,int key) {
+    public Livro(String titulo, String autor, String isbn, int key) {
         super(titulo);
         this.autor = autor;
         this.isbn = isbn;
-        this.hashCodeOne = hashCodeOne;
-        this.hashCodeTwo = hashCodeTwo;
         this.tituloLivro = titulo;
         this.key = key;
     }
@@ -121,19 +119,8 @@ public class Livro extends Item{
         return tituloLivro;
     }
 
-    public int getHashCodeOne() {
-        return hashCodeOne;
-    }
-
-    public int getHashCodeTwo() {
-        return hashCodeTwo;
-    }
-
     public int getKey() {
         return key;
     }
 
-    public void setKey(int key) {
-        this.key = key;
-    }
 }
