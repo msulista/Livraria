@@ -6,6 +6,7 @@ package view.menu;
 public class LivrariaMenu {
     public static final int OP_BUSCA_LINEAR = 1;
     public static final int OP_COMPRA_OTIMIZADA = 2;
+    public static final int OP_BUSCA_HASHTABLE = 3;
     public static final int OP_SAIR = 0;
 
     public static String getOpcoes() {
@@ -14,6 +15,7 @@ public class LivrariaMenu {
                 "\n--------------------------------------\n"
                 + "1- Menu Busca Linear\n"
                 + "2- Menu Busca Binaria\n"
+                + "3- Menu Busca HashTable\n"
                 + "0- Sair da Aplicação"
                 + "\n--------------------------------------");
     }

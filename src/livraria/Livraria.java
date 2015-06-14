@@ -1,4 +1,6 @@
 package livraria;
+import hashtable.HashTableLivro;
+import hashtable.IhashTableLivro;
 import model.*;
 import util.Console;
 import view.menu.LivrariaMenu;
@@ -6,6 +8,8 @@ import view.menu.LivrariaMenu;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 
@@ -16,13 +20,16 @@ public class Livraria {
     public static void main(String[] args) throws IOException {
 
         Estoque estoque = new Estoque();
+        IhashTableLivro hashTable = new HashTableLivro();
+
+        List<Livro> listaLivro = new ArrayList<Livro>();
 
         //Criando cliente
         Cliente cliente = new Cliente("Marcus", "123456789", "95887354");
 
         //lendo arquivo csv e criando objetos e adicionando no vetor Estoque
         try {
-            lerArquivo(estoque);
+            lerArquivo(estoque, listaLivro);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,6 +72,11 @@ public class Livraria {
 
                     break;
                 }
+                case LivrariaMenu.OP_BUSCA_HASHTABLE:{
+                    System.out.println("\t\tBUSCA HASHTABLE");
+                    hashTable.recebeListaLivros(listaLivro);
+                    hashTable.buscaLivroHash(Console.lerLong("Digite ISBN: "));
+                }
                 case LivrariaMenu.OP_SAIR:{
                     System.out.println("Voltar ao menu principal!!!");
                     break;
@@ -80,7 +92,7 @@ public class Livraria {
 
 
 //Metodos para ler, separar, criar objetos e adicionar ao estoque
-    public static void lerArquivo(Estoque estoque) throws IOException {
+    public static void lerArquivo(Estoque estoque, List<Livro> livroList) throws IOException {
         String[] itens = new String[6425];
 
         //Abre arquivo .cvs
@@ -91,13 +103,13 @@ public class Livraria {
         String linha = myBuffer.readLine();
         for (int i = 0; i < itens.length; i++){
             itens[i] = linha;
-            criaObjetosDeItem(linha, estoque);
+            criaObjetosDeItem(linha, estoque, livroList);
             linha = myBuffer.readLine();//Não sei por que isso esta funcionando mas esta, então deixa assim
             //System.out.println(i + " - " + itens[i]);
         }
         arquicoCSV.close();
     }
-    public static void criaObjetosDeItem(String linha, Estoque estoque){
+    public static void criaObjetosDeItem(String linha, Estoque estoque, List<Livro> livroList){
         String[] item = new String[20]; //Pra colocar a linha
 
         String titulo = "";
@@ -120,6 +132,7 @@ public class Livraria {
             }
             livro = new Livro(titulo, autor, isbn);
             adicionaEstoque(estoque, livro);
+            livroList.add(livro); //Para testar HashTable
 
 
         }else if(item[0].equalsIgnoreCase("dvd")){

@@ -32,6 +32,13 @@ public class Console {
         return (ler.nextInt());
     }
 
+    public static Long lerLong(Object input){
+
+        System.out.print(input);
+        Scanner ler = new Scanner(System.in);
+        return (ler.nextLong());
+    }
+
     /**
      * Metodo para entrada de dados do tipo Double
      *

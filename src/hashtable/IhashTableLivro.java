@@ -9,12 +9,13 @@ import java.util.List;
  */
 public interface IhashTableLivro {
 
-    public int hashcodeOne(String isbn);
-    public int hashcodeTwo(String isbn);
+    public long hashcodeOne(String isbn);
+    public long hashcodeTwo(String isbn);
 
     public void recebeListaLivros(List<Livro> livroList);
     public Livro criaLivroHash(Livro livro, int hc1, int hc2, int key);
     public void insereLivroNoHashList(Livro livro);
+    public void coocko(Livro livroAntigo, Livro livroNovo);
 
-    public Livro buscaLivroHash(int isbn);
+    public Livro buscaLivroHash(long isbn);
 }

@@ -18,19 +18,27 @@ public class HashTableLivro implements IhashTableLivro{
     private List<Integer> pilhaDeHashs = new ArrayList<Integer>();
 
     @Override
-    public int hashcodeOne(String isbn) {
-        int hashOne = 0;
-        hashOne = Integer.parseInt(isbn);
+    public long hashcodeOne(String isbn) {
+        long hashOne = 0;
+        try {
+            hashOne = Long.parseLong(isbn);
+        }catch (NumberFormatException nfe){
+            System.out.println("É já éras exception");
+        }
         hashOne = hashOne % livrosHash.length;
         return hashOne;
     }
 
     @Override
-    public int hashcodeTwo(String isbn) {
-        int hashTwo = 0;
+    public long hashcodeTwo(String isbn) {
+        long hashTwo = 0;
         String stringMd5 = md5(isbn).substring(1,7);
        // System.out.println("substring " + stringMd5);
-        hashTwo = Integer.parseInt(stringMd5)%livrosHash.length;
+        try {
+            hashTwo = Long.parseLong(stringMd5)%livrosHash.length;
+        }catch (NumberFormatException nfe){
+            System.out.println("É já éras exception");
+        }
         return hashTwo;
     }
 
@@ -51,27 +59,95 @@ public class HashTableLivro implements IhashTableLivro{
     @Override
     public void insereLivroNoHashList(Livro livro) {
 
-        if (livrosHash[hashcodeOne(livro.getIsbn())] == null){
-            int hashCode1 = hashcodeOne(livro.getIsbn());
-            int hashCode2 = hashcodeTwo(livro.getIsbn());
-            int key = Integer.parseInt(livro.getIsbn());
+        if (livrosHash[(int)hashcodeOne(livro.getIsbn())] == null){
+
+            int hashCode1 = (int)hashcodeOne(livro.getIsbn());
+            int hashCode2 = (int)hashcodeTwo(livro.getIsbn());
+            System.out.println("Aqui tudo ok");
+            int key = 0;
+            try {
+                key = Integer.parseInt(livro.getIsbn());
+                System.out.println(key);
+            }catch (NumberFormatException nfe){
+
+                System.out.println("É já éras exception");
+            }
             livrosHash[hashCode1] = criaLivroHash(livro, hashCode1, hashCode2, key);
 
-        }else if (hashcodeOne(livrosHash[hashcodeOne(livro.getIsbn())].getIsbn())  == hashcodeOne(livro.getIsbn()) && (!pilhaDeHashs.contains(hashcodeOne(livro.getIsbn())))){
+        }else if (hashcodeOne(livrosHash[(int)hashcodeOne(livro.getIsbn())].getIsbn())  == hashcodeOne(livro.getIsbn()) && (!pilhaDeHashs.contains(hashcodeOne(livro.getIsbn())))){
             //Novo livro na posição
-            int hashCode1 = hashcodeOne(livro.getIsbn());
-            Livro livroNovo = criaLivroHash(livro, hashCode1, hashcodeTwo(livro.getIsbn()), Integer.parseInt(livro.getIsbn()));
+            int hashCode1 = (int)hashcodeOne(livro.getIsbn());
+            int key = 0;
+            try {
+                key = Integer.parseInt(livro.getIsbn());
+                System.out.println(key);
+            }catch (NumberFormatException nfe){
+
+                System.out.println("É já éras exception");
+            }
+            Livro livroNovo = criaLivroHash(livro, hashCode1, (int)hashcodeTwo(livro.getIsbn()), key);
 
             //livro antigo na posição
-            Livro livroAntigo = livrosHash[hashcodeOne(livro.getIsbn())];
+            Livro livroAntigo = livrosHash[(int)hashcodeOne(livro.getIsbn())];
             livrosHash[hashCode1] = livroNovo; //Adicionei o livro novo na sua posição de hash1
             coocko(livroAntigo, livroNovo);
         }
 
     }
 
+
+    //Testa qual o hash ésta sendo utilizado
     @Override
-    public Livro buscaLivroHash(int isbn) {
+    public void coocko(Livro livroAntigo, Livro livroNovo) {
+
+        if (hashcodeOne(livroAntigo.getIsbn()) == hashcodeOne(livroNovo.getIsbn())) { //Verifica se o livro antigo esta na posição HashCodeOne
+
+            if (!pilhaDeHashs.contains((int)hashcodeTwo(livroAntigo.getIsbn()))){ //Verifica se a pilha já contem a posição pra onde ele vai.
+
+                if (livrosHash[(int)hashcodeTwo(livroAntigo.getIsbn())] == null) { //Se a nova posição vazia adiciona e zera pilha
+
+                    livrosHash[(int)hashcodeTwo(livroAntigo.getIsbn())] = livroAntigo;
+                        pilhaDeHashs.clear();
+                    }else {                                     // Se não copia livro antigo na posição  adiciona o novo e refaz o coocko
+
+                        Livro livroAntigoCoocko = livrosHash[(int)hashcodeTwo(livroAntigo.getIsbn())];
+                    livrosHash[(int)hashcodeTwo(livroAntigo.getIsbn())] = livroAntigo;
+                    pilhaDeHashs.add((int)hashcodeTwo(livroAntigo.getIsbn()));
+                    coocko(livroAntigoCoocko, livroAntigo);  //Aqui chamo o metodo novamente só que desta vez mudo os livros
+                    }
+                }else {                                             //Caso já tenha na pilha deveria ser feito o ReHash mas encerra o programa
+                    System.out.println("Não é possivel adicionar, deve realizar o Rehash!!!");
+                    //break;
+                }
+
+            }else if(hashcodeTwo(livroAntigo.getIsbn()) == hashcodeTwo(livroNovo.getIsbn())){  //Verifica se o livro antigo esta na posição HashCodeTwo
+
+                if (!pilhaDeHashs.contains((int)hashcodeOne(livroAntigo.getIsbn()))) { //Verifica se a pilha já contem a posição pra onde ele vai.
+
+                    if (livrosHash[(int)hashcodeOne(livroAntigo.getIsbn())] == null) { //Se a nova posição vazia adiciona e zera pilha
+
+                        livrosHash[(int)hashcodeOne(livroAntigo.getIsbn())] = livroAntigo;
+                        pilhaDeHashs.clear();
+                    }else {                                         // Se não copia livro antigo na posição  adiciona o novo e refaz o coocko
+
+                        Livro livroAntigoCoocko = livrosHash[(int)hashcodeOne(livroAntigo.getIsbn())];
+                        livrosHash[(int)hashcodeOne(livroAntigo.getIsbn())] = livroAntigo;
+                        pilhaDeHashs.add((int)hashcodeOne(livroAntigo.getIsbn()));
+                        coocko(livroAntigoCoocko, livroAntigo);  //Recursividade apenas mudo os livros.
+                    }
+                }else {                                             //Caso já tenha na pilha deveria ser feito o ReHash mas encerra o programa
+                    System.out.println("Não é possivel adicionar, deve realizar o Rehash!!!");
+                    //break;
+                }
+            }
+    }
+
+    @Override
+    public Livro buscaLivroHash(long isbn) {
+        for (int i = 0; i < livrosHash.length; i++) {
+
+            //não implementado
+        }
         return null;
     }
 
@@ -88,61 +164,4 @@ public class HashTableLivro implements IhashTableLivro{
         hashMd5 = hash.toString(9);
         return hashMd5;
     }
-
-    //Testa qual o hash ésta sendo utilizado
-    public void coocko(Livro livroAntigo, Livro livroNovo) {
-
-        if (hashcodeOne(livroAntigo.getIsbn()) == hashcodeOne(livroNovo.getIsbn())) { //Verifica se o livro antigo esta na posição HashCodeOne
-
-            if (!pilhaDeHashs.contains(hashcodeTwo(livroAntigo.getIsbn()))){ //Verifica se a pilha já contem a posição pra onde ele vai.
-
-                if (livrosHash[hashcodeTwo(livroAntigo.getIsbn())] == null) { //Se a nova posição vazia adiciona e zera pilha
-
-                    livrosHash[hashcodeTwo(livroAntigo.getIsbn())] = livroAntigo;
-                        pilhaDeHashs.clear();
-                    }else {                                     // Se não copia livro antigo na posição  adiciona o novo e refaz o coocko
-
-                        Livro livroAntigoCoocko = livrosHash[hashcodeTwo(livroAntigo.getIsbn())];
-                    livrosHash[hashcodeTwo(livroAntigo.getIsbn())] = livroAntigo;
-                    pilhaDeHashs.add(hashcodeTwo(livroAntigo.getIsbn()));
-                        coocko(livrosHash[hashcodeTwo(livroAntigo.getIsbn())], livroAntigo);
-                    }
-                }else {                                             //Caso já tenha na pilha deveria ser feito o ReHash mas encerra o programa
-                    System.out.println("Não é possivel adicionar, deve realizar o Rehash!!!");
-                    //break;
-                }
-
-            }else if(hashcodeTwo(livroAntigo.getIsbn()) == hashcodeTwo(livroNovo.getIsbn())){  //Verifica se o livro antigo esta na posição HashCodeTwo
-
-                if (!pilhaDeHashs.contains(hashcodeOne(livroAntigo.getIsbn()))) { //Verifica se a pilha já contem a posição pra onde ele vai.
-
-                    if (livrosHash[hashcodeOne(livroAntigo.getIsbn())] == null) { //Se a nova posição vazia adiciona e zera pilha
-
-                        livrosHash[hashcodeOne(livroAntigo.getIsbn())] = livroAntigo;
-                        pilhaDeHashs.clear();
-                    }else {                                         // Se não copia livro antigo na posição  adiciona o novo e refaz o coocko
-
-                        Livro livroAntigoCoocko = livrosHash[hashcodeOne(livroAntigo.getIsbn())];
-                        livrosHash[hashcodeOne(livroAntigo.getIsbn())] = livroAntigo;
-                        pilhaDeHashs.add(hashcodeOne(livroAntigo.getIsbn()));
-                        coocko(livroAntigoCoocko, livroAntigo);
-                    }
-                }else {                                             //Caso já tenha na pilha deveria ser feito o ReHash mas encerra o programa
-                    System.out.println("Não é possivel adicionar, deve realizar o Rehash!!!");
-                    //break;
-                }
-            }
-    }
-
-/*
-    public static int verificaChave(List<Integer> pilhaDeHashs, Livro livro){
-        int key = 0;
-
-        if (!pilhaDeHashs.contains(livro.getKey())){
-            pilhaDeHashs.add(livro.getKey())
-        }
-
-        return key;
-    }
-*/
 }
