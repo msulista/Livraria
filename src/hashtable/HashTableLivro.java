@@ -23,7 +23,7 @@ public class HashTableLivro implements IhashTableLivro{
         try {
             hashOne = Long.parseLong(isbn);
         }catch (NumberFormatException nfe){
-            System.out.println("É já éras exception");
+            System.out.println("É já éras exception hashcodeOne");
         }
         hashOne = hashOne % livrosHash.length;
         return hashOne;
@@ -37,7 +37,7 @@ public class HashTableLivro implements IhashTableLivro{
         try {
             hashTwo = Long.parseLong(stringMd5)%livrosHash.length;
         }catch (NumberFormatException nfe){
-            System.out.println("É já éras exception");
+            System.out.println("É já éras exception hashcodeTwo");
         }
         return hashTwo;
     }
@@ -51,7 +51,7 @@ public class HashTableLivro implements IhashTableLivro{
     }
 
     @Override
-    public Livro criaLivroHash(Livro livro, int hash1, int hash2, int key) {
+    public Livro criaLivroHash(Livro livro, int hash1, int hash2, long key) {
         Livro livroHash = new Livro(livro.getTitulo(), livro.getAutor(), livro.getIsbn(), key);
         return livroHash;
     }
@@ -63,14 +63,14 @@ public class HashTableLivro implements IhashTableLivro{
 
             int hashCode1 = (int)hashcodeOne(livro.getIsbn());
             int hashCode2 = (int)hashcodeTwo(livro.getIsbn());
-            System.out.println("Aqui tudo ok");
-            int key = 0;
+           // System.out.println("Aqui tudo ok");
+            long key = 0;
             try {
-                key = Integer.parseInt(livro.getIsbn());
+                key = Long.parseLong(livro.getIsbn());
                 System.out.println(key);
             }catch (NumberFormatException nfe){
 
-                System.out.println("É já éras exception");
+                System.out.println("É já éras exception insereLivroNoHashList");
             }
             livrosHash[hashCode1] = criaLivroHash(livro, hashCode1, hashCode2, key);
 
@@ -83,7 +83,7 @@ public class HashTableLivro implements IhashTableLivro{
                 System.out.println(key);
             }catch (NumberFormatException nfe){
 
-                System.out.println("É já éras exception");
+                System.out.println("É já éras exception insereLivroNoHashList2");
             }
             Livro livroNovo = criaLivroHash(livro, hashCode1, (int)hashcodeTwo(livro.getIsbn()), key);
 
@@ -110,7 +110,7 @@ public class HashTableLivro implements IhashTableLivro{
                         pilhaDeHashs.clear();
                     }else {                                     // Se não copia livro antigo na posição  adiciona o novo e refaz o coocko
 
-                        Livro livroAntigoCoocko = livrosHash[(int)hashcodeTwo(livroAntigo.getIsbn())];
+                    Livro livroAntigoCoocko = livrosHash[(int)hashcodeTwo(livroAntigo.getIsbn())];
                     livrosHash[(int)hashcodeTwo(livroAntigo.getIsbn())] = livroAntigo;
                     pilhaDeHashs.add((int)hashcodeTwo(livroAntigo.getIsbn()));
                     coocko(livroAntigoCoocko, livroAntigo);  //Aqui chamo o metodo novamente só que desta vez mudo os livros
@@ -143,12 +143,14 @@ public class HashTableLivro implements IhashTableLivro{
     }
 
     @Override
-    public Livro buscaLivroHash(long isbn) {
-        for (int i = 0; i < livrosHash.length; i++) {
+    public Livro buscaLivroHash(String isbn){
+        int hashOne = (int)hashcodeOne(isbn);
+        int hashTwo = (int)hashcodeTwo(isbn);
 
-            //não implementado
-        }
-        return null;
+       if (livrosHash[hashOne].getIsbn().equals(isbn)){
+            return livrosHash[hashOne];
+        }  else
+            return livrosHash[hashTwo];
     }
 
     //Chamo só na hora de criaar meu hashTwo

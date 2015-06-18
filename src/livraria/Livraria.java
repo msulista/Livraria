@@ -74,8 +74,15 @@ public class Livraria {
                 }
                 case LivrariaMenu.OP_BUSCA_HASHTABLE:{
                     System.out.println("\t\tBUSCA HASHTABLE");
+                    for (Livro livros : listaLivro){
+                        System.out.println(livros.getIsbn());
+                    }
                     hashTable.recebeListaLivros(listaLivro);
-                    hashTable.buscaLivroHash(Console.lerLong("Digite ISBN: "));
+                    System.out.println("");
+                    Livro livroBuscado = hashTable.buscaLivroHash(Console.lerString("Digite ISBN: "));
+
+                    System.out.println("Titulo: " + livroBuscado.getTitulo() + " \t ISBN: " + livroBuscado.getIsbn() + " \t Autores: " + livroBuscado.getAutor() +
+                    "\n");
                 }
                 case LivrariaMenu.OP_SAIR:{
                     System.out.println("Voltar ao menu principal!!!");

@@ -15,7 +15,7 @@ public class Livro extends Item{
     private String edicao;
     private int hashCodeOne;
     private int hashCodeTwo;
-    private int key;
+    private long key;
 
     /**
      * Metodo construtor
@@ -35,7 +35,7 @@ public class Livro extends Item{
         this.editora = editora;
         this.edicao = edicao;
     }
-    public Livro(String titulo, String autor, String isbn, int key) {
+    public Livro(String titulo, String autor, String isbn, long key) {
         super(titulo);
         this.autor = autor;
         this.isbn = isbn;
@@ -119,8 +119,7 @@ public class Livro extends Item{
         return tituloLivro;
     }
 
-    public int getKey() {
+    public long getKey() {
         return key;
     }
-
 }

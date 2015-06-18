@@ -13,9 +13,9 @@ public interface IhashTableLivro {
     public long hashcodeTwo(String isbn);
 
     public void recebeListaLivros(List<Livro> livroList);
-    public Livro criaLivroHash(Livro livro, int hc1, int hc2, int key);
+    public Livro criaLivroHash(Livro livro, int hc1, int hc2, long key);
     public void insereLivroNoHashList(Livro livro);
     public void coocko(Livro livroAntigo, Livro livroNovo);
 
-    public Livro buscaLivroHash(long isbn);
+    public Livro buscaLivroHash(String isbn);
 }
